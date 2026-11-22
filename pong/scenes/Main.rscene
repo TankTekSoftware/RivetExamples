@@ -1,0 +1,392 @@
+{
+  "format": "rivet.scene",
+  "version": 1,
+  "name": "Main",
+  "entities": [
+    {
+      "uuid": "ffe020e26ee63609",
+      "name": "Environment",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "Environment": {
+          "skybox": "",
+          "skyboxIntensity": 1.0,
+          "iblIntensity": 1.0,
+          "skyboxRotation": 0.0,
+          "ambientColor": [
+            0.25,
+            0.27000001072883606,
+            0.3199999928474426,
+            1.0
+          ],
+          "exposure": 1.0,
+          "tonemapper": 2,
+          "ssaoEnabled": true,
+          "ssaoRadius": 0.5,
+          "ssaoIntensity": 1.0,
+          "bloomEnabled": true,
+          "bloomThreshold": 1.0,
+          "bloomIntensity": 0.03999999910593033,
+          "fxaaEnabled": true,
+          "shadowDistance": 60.0,
+          "shadowSoftness": 1.5,
+          "fogEnabled": false,
+          "fogColor": [
+            0.6000000238418579,
+            0.6499999761581421,
+            0.699999988079071,
+            1.0
+          ],
+          "fogDensity": 0.019999999552965164
+        }
+      }
+    },
+    {
+      "uuid": "f239d4dcdc24a449",
+      "name": "Sun",
+      "active": true,
+      "parent": "ffe020e26ee63609",
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            -0.36964380741119385,
+            0.2391175776720047,
+            0.0990457609295845,
+            0.8923991322517395
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            0.9999999403953552
+          ]
+        },
+        "Light": {
+          "type": 0,
+          "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "intensity": 3.0,
+          "range": 10.0,
+          "innerConeAngle": 20.0,
+          "outerConeAngle": 30.0,
+          "castShadows": true
+        }
+      }
+    },
+    {
+      "uuid": "b33fb857375a6283",
+      "name": "Geometry",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      }
+    },
+    {
+      "uuid": "6ae7250e7085aa04",
+      "name": "Ground",
+      "active": true,
+      "parent": "b33fb857375a6283",
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            -0.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            25.0,
+            1.0,
+            15.0
+          ]
+        },
+        "MeshRenderer": {
+          "mesh": "builtin:cube",
+          "material": "assets/materials/black.rmat",
+          "tint": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "castShadows": true,
+          "visible": true
+        }
+      }
+    },
+    {
+      "uuid": "eb2b04a15c4821f5",
+      "name": "CameraMount",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            -0.1736481934785843,
+            0.0,
+            0.0,
+            0.9848077893257141
+          ],
+          "scale": [
+            0.9999997019767761,
+            0.9999991655349731,
+            0.9999997615814209
+          ]
+        }
+      }
+    },
+    {
+      "uuid": "b56863c78033ef94",
+      "name": "Main Camera",
+      "active": true,
+      "parent": "eb2b04a15c4821f5",
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            8.0,
+            18.5
+          ],
+          "rotation": [
+            -0.13052619993686676,
+            0.0,
+            0.0,
+            0.9914448857307434
+          ],
+          "scale": [
+            1.0,
+            0.9999995231628418,
+            0.9999995231628418
+          ]
+        },
+        "Camera": {
+          "projection": 0,
+          "fieldOfView": 60.0,
+          "orthographicSize": 5.0,
+          "nearPlane": 0.10000000149011612,
+          "farPlane": 500.0,
+          "primary": true,
+          "priority": 0,
+          "clearMode": 0,
+          "clearColor": [
+            0.11999999731779099,
+            0.12999999523162842,
+            0.1599999964237213,
+            1.0
+          ]
+        }
+      }
+    },
+    {
+      "uuid": "0ba8209a84ef2226",
+      "name": "Actors",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      }
+    },
+    {
+      "uuid": "76113d3ee84c9d36",
+      "name": "Ball",
+      "active": true,
+      "parent": "0ba8209a84ef2226",
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "MeshRenderer": {
+          "mesh": "builtin:cube",
+          "material": "assets/materials/ball.rmat",
+          "tint": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "castShadows": false,
+          "visible": true
+        },
+        "LuaScript": {
+          "script": "scripts/ball.lua",
+          "properties": {},
+          "enabled": true
+        }
+      }
+    },
+    {
+      "uuid": "677129ca5c09c2c2",
+      "name": "Player",
+      "active": true,
+      "parent": "0ba8209a84ef2226",
+      "components": {
+        "Transform": {
+          "position": [
+            10.0,
+            0.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            3.0
+          ]
+        },
+        "MeshRenderer": {
+          "mesh": "builtin:cube",
+          "material": "assets/materials/paddle.rmat",
+          "tint": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "castShadows": true,
+          "visible": true
+        },
+        "LuaScript": {
+          "script": "scripts/player.lua",
+          "properties": {
+            "halfLength": {
+              "type": "float",
+              "value": 6.0
+            }
+          },
+          "enabled": true
+        }
+      }
+    },
+    {
+      "uuid": "66bbdf6fdb0c69f4",
+      "name": "BotPaddle",
+      "active": true,
+      "parent": "0ba8209a84ef2226",
+      "components": {
+        "Transform": {
+          "position": [
+            -10.0,
+            0.5,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            3.0
+          ]
+        },
+        "MeshRenderer": {
+          "mesh": "builtin:cube",
+          "material": "assets/materials/paddle.rmat",
+          "tint": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "castShadows": true,
+          "visible": true
+        },
+        "LuaScript": {
+          "script": "scripts/bot.lua",
+          "properties": {},
+          "enabled": true
+        }
+      }
+    }
+  ]
+}

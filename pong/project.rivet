@@ -1,0 +1,61 @@
+{
+  "format": "rivet.project",
+  "version": 1,
+  "name": "pong",
+  "gameVersion": "1.0.0",
+  "startScene": "scenes/Main.rscene",
+  "window": {
+    "title": "pong",
+    "width": 1280,
+    "height": 720,
+    "resizable": true,
+    "fullscreen": false,
+    "vsync": true,
+    "targetFps": 0
+  },
+  "physics": {
+    "fixedTimestep": 0.01666666753590107,
+    "maxFixedSteps": 8,
+    "gravity2D": [
+      0.0,
+      -9.8100004196167
+    ],
+    "gravity3D": [
+      0.0,
+      -9.8100004196167,
+      0.0
+    ],
+    "subSteps": 4
+  },
+  "rendering": {
+    "shadowMapSize": 2048
+  },
+  "inputAxes": [
+    {
+      "name": "Horizontal",
+      "negative": [
+        "A",
+        "LEFT"
+      ],
+      "positive": [
+        "D",
+        "RIGHT"
+      ],
+      "gamepadAxis": "LEFT_X",
+      "invertGamepad": false
+    },
+    {
+      "name": "Vertical",
+      "negative": [
+        "S",
+        "DOWN"
+      ],
+      "positive": [
+        "W",
+        "UP"
+      ],
+      "gamepadAxis": "LEFT_Y",
+      "invertGamepad": true
+    }
+  ]
+}
