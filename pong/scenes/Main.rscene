@@ -511,7 +511,7 @@
         },
         "UiText": {
           "text": "0 : 0",
-          "font": "assets/fonts/VCR_OSD.ttf",
+          "font": "assets/fonts/Arcade.ttf",
           "fontSize": 64.0,
           "color": [
             1.0,
