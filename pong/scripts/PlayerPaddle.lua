@@ -11,9 +11,6 @@ local Player = {
     },
 }
 
-function Player:onStart()
-end
-
 function Player:onUpdate(dt)
     local direction = 0
 
