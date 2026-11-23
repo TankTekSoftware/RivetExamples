@@ -291,7 +291,7 @@
           "visible": true
         },
         "LuaScript": {
-          "script": "scripts/ball.lua",
+          "script": "scripts/Ball.lua",
           "properties": {},
           "enabled": true
         }
@@ -299,7 +299,7 @@
     },
     {
       "uuid": "677129ca5c09c2c2",
-      "name": "Player",
+      "name": "PlayerPaddle",
       "active": true,
       "parent": "0ba8209a84ef2226",
       "components": {
@@ -334,7 +334,7 @@
           "visible": true
         },
         "LuaScript": {
-          "script": "scripts/player.lua",
+          "script": "scripts/Player.lua",
           "properties": {
             "halfLength": {
               "type": "float",
@@ -382,7 +382,7 @@
           "visible": true
         },
         "LuaScript": {
-          "script": "scripts/bot.lua",
+          "script": "scripts/Bot.lua",
           "properties": {},
           "enabled": true
         }

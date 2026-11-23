@@ -19,7 +19,7 @@ function Ball:onStart()
 
     -- Paddles the ball bounces off; any that are missing from the scene are skipped.
     self.paddles = {}
-    for _, path in ipairs({ "Actors/Player", "Actors/BotPaddle" }) do
+    for _, path in ipairs({ "Actors/PlayerPaddle", "Actors/BotPaddle" }) do
         local paddle = Scene.findByPath(path)
         if paddle then
             self.paddles[#self.paddles + 1] = paddle
