@@ -95,7 +95,7 @@
           "range": 10.0,
           "innerConeAngle": 20.0,
           "outerConeAngle": 30.0,
-          "castShadows": true
+          "castShadows": false
         }
       }
     },
@@ -133,7 +133,7 @@
         "Transform": {
           "position": [
             0.0,
-            -0.5,
+            -0.4999999403953552,
             0.0
           ],
           "rotation": [
@@ -157,7 +157,7 @@
             1.0,
             1.0
           ],
-          "castShadows": true,
+          "castShadows": false,
           "visible": true
         }
       }
@@ -174,10 +174,10 @@
             0.0
           ],
           "rotation": [
-            -0.1736481934785843,
+            -0.2588190734386444,
             0.0,
             0.0,
-            0.9848077893257141
+            0.9659258723258972
           ],
           "scale": [
             0.9999997019767761,
@@ -195,20 +195,20 @@
       "components": {
         "Transform": {
           "position": [
-            0.0,
-            8.0,
-            18.5
+            0.2847200334072113,
+            7.151979446411133,
+            22.837276458740234
           ],
           "rotation": [
-            -0.13052619993686676,
+            -0.13052630424499512,
             0.0,
             0.0,
             0.9914448857307434
           ],
           "scale": [
             1.0,
-            0.9999995231628418,
-            0.9999995231628418
+            1.0,
+            1.0
           ]
         },
         "Camera": {
@@ -280,7 +280,7 @@
         },
         "MeshRenderer": {
           "mesh": "builtin:cube",
-          "material": "assets/materials/ball.rmat",
+          "material": "assets/materials/yellow.rmat",
           "tint": [
             1.0,
             1.0,
@@ -323,7 +323,7 @@
         },
         "MeshRenderer": {
           "mesh": "builtin:cube",
-          "material": "assets/materials/paddle.rmat",
+          "material": "assets/materials/white.rmat",
           "tint": [
             1.0,
             1.0,
@@ -371,7 +371,7 @@
         },
         "MeshRenderer": {
           "mesh": "builtin:cube",
-          "material": "assets/materials/paddle.rmat",
+          "material": "assets/materials/white.rmat",
           "tint": [
             1.0,
             1.0,
@@ -383,8 +383,145 @@
         },
         "LuaScript": {
           "script": "scripts/BotPaddle.lua",
+          "properties": {
+            "speed": {
+              "type": "float",
+              "value": 10.0
+            }
+          },
+          "enabled": true
+        }
+      }
+    },
+    {
+      "uuid": "3b8c6b2d6cb9bc9d",
+      "name": "GameController",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "LuaScript": {
+          "script": "scripts/GameController.lua",
           "properties": {},
           "enabled": true
+        }
+      }
+    },
+    {
+      "uuid": "c75474ca1766ffc1",
+      "name": "CanvasLayer",
+      "active": true,
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "UiCanvas": {
+          "referenceResolution": [
+            1920.0,
+            1080.0
+          ],
+          "scaleMode": 1,
+          "scaleFactor": 1.0,
+          "matchWidthOrHeight": 0.5,
+          "sortOrder": 0
+        }
+      }
+    },
+    {
+      "uuid": "d6bf568dc10a5c82",
+      "name": "ScoreLabel",
+      "active": true,
+      "parent": "c75474ca1766ffc1",
+      "components": {
+        "Transform": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "LuaScript": {
+          "script": "scripts/ScoreLabel.lua",
+          "properties": {},
+          "enabled": true
+        },
+        "UiRect": {
+          "anchorMin": [
+            0.5,
+            0.0
+          ],
+          "anchorMax": [
+            0.5,
+            0.0
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "position": [
+            0.0,
+            50.0
+          ],
+          "size": [
+            300.0,
+            60.0
+          ]
+        },
+        "UiText": {
+          "text": "0 : 0",
+          "font": "assets/fonts/VCR_OSD.ttf",
+          "fontSize": 64.0,
+          "color": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "horizontalAlignment": 1,
+          "verticalAlignment": 1,
+          "visible": true
         }
       }
     }

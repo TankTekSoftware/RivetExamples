@@ -14,8 +14,12 @@ local Ball = {
 }
 
 function Ball:onStart()
+    math.randomseed(os.time())
+    self.lastSoundIdx = -1
     self.velocityX = 0.7
     self.velocityZ = 0.3
+
+    self.gameController = Scene.findByPath("GameController")
 
     -- Paddles the ball bounces off; any that are missing from the scene are skipped.
     self.paddles = {}
@@ -31,14 +35,41 @@ function Ball:onStart()
     self.velocityZ = self.velocityZ / len
 end
 
+function Ball:reset()
+    self.speed = 10.0
+    local xPos = 0.0
+    local zPos = 0.0
+
+    return xPos, zPos
+end
+
 function Ball:onUpdate(dt)
     local pos = self.entity.position
 
     pos.x = pos.x + self.velocityX * self.speed * dt
     pos.z = pos.z + self.velocityZ * self.speed * dt
 
+    if pos.x <= -self.boundX then
+        print("Player Scored!")
+        pos.x, pos.z = self:reset()
+        self.gameController:send("addPlayerScore")
+
+        -- Apply the updated position.
+        self.entity.position = pos
+        return
+    end
+
+    if pos.x >= self.boundX then
+        print("Bot Scored!")
+        pos.x, pos.z = self:reset()
+        self.gameController:send("addBotScore")
+
+        -- Apply the updated position.
+        self.entity.position = pos
+        return
+    end
+
     -- Apply wall bounces
-    pos.x, self.velocityX = self:applyBounce(pos.x, self.velocityX, self.boundX)
     pos.z, self.velocityZ = self:applyBounce(pos.z, self.velocityZ, self.boundZ)
 
     -- Apply paddle bounces.
@@ -49,10 +80,22 @@ function Ball:onUpdate(dt)
     self.entity.position = pos
 end
 
+function Ball:playSound()
+    local idx = math.random(0, 3)
+    if idx == self.lastSoundIdx then
+        self:playSound()
+        return
+    end
+    Audio.playSound("assets/sfx/ballBounce" .. idx .. ".wav")
+    self.lastSoundIdx = idx
+end
+
 function Ball:applyBounce(p, v, limit)
     if p >= limit then
+        self:playSound()
         return limit, -math.abs(v)
     elseif p <= -limit then
+        self:playSound()
         return -limit, math.abs(v)
     end
 
@@ -74,11 +117,14 @@ function Ball:applyPaddleBounce(pos, paddle)
     -- Only bounce if moving toward the paddle (prevents re-flipping while still overlapping)
     local side = (pos.x < paddlePos.x) and -1 or 1      -- which side of the paddle the ball is on
     if self.velocityX * side >= 0 then
-        return 
+        return
     end
 
     -- Increase the speed after a paddle hit.
     self.speed = self.speed + 0.25
+
+    -- Play the blip sound effect
+    self:playSound()
 
     -- Push the ball out so it does not stay inside the paddle
     pos.x = paddlePos.x + side * reachX

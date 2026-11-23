@@ -525,6 +525,11 @@ function Entity:set(property, value) end
 ---@overload fun(self: Entity, name: "VisualScript"): VisualScriptComponent?
 ---@overload fun(self: Entity, name: "NativeScript"): NativeScriptComponent?
 ---@overload fun(self: Entity, name: "AudioSource"): AudioSourceComponent?
+---@overload fun(self: Entity, name: "UiCanvas"): UiCanvasComponent?
+---@overload fun(self: Entity, name: "UiRect"): UiRectComponent?
+---@overload fun(self: Entity, name: "UiImage"): UiImageComponent?
+---@overload fun(self: Entity, name: "UiText"): UiTextComponent?
+---@overload fun(self: Entity, name: "UiButton"): UiButtonComponent?
 function Entity:getComponent(name) end
 
 ---Adds the component if the entity has none, sets the given fields and returns it.
@@ -547,6 +552,11 @@ function Entity:getComponent(name) end
 ---@overload fun(self: Entity, name: "VisualScript", values?: table<string, any>): VisualScriptComponent
 ---@overload fun(self: Entity, name: "NativeScript", values?: table<string, any>): NativeScriptComponent
 ---@overload fun(self: Entity, name: "AudioSource", values?: table<string, any>): AudioSourceComponent
+---@overload fun(self: Entity, name: "UiCanvas", values?: table<string, any>): UiCanvasComponent
+---@overload fun(self: Entity, name: "UiRect", values?: table<string, any>): UiRectComponent
+---@overload fun(self: Entity, name: "UiImage", values?: table<string, any>): UiImageComponent
+---@overload fun(self: Entity, name: "UiText", values?: table<string, any>): UiTextComponent
+---@overload fun(self: Entity, name: "UiButton", values?: table<string, any>): UiButtonComponent
 function Entity:addComponent(name, values) end
 
 ---The name of a registered component.
@@ -567,6 +577,11 @@ function Entity:addComponent(name, values) end
 ---| "VisualScript"
 ---| "NativeScript"
 ---| "AudioSource"
+---| "UiCanvas"
+---| "UiRect"
+---| "UiImage"
+---| "UiText"
+---| "UiButton"
 ---| string
 
 ---A component of an entity; its fields are read and written directly: `light.intensity = 2`.
@@ -741,6 +756,51 @@ function Entity:addComponent(name, values) end
 ---@field streaming boolean Stream from disk; use for long music tracks.
 ---@field spatial boolean
 ---@field maxDistance number From 0.01 to 10000.
+
+---Root of a UI tree, drawn over the scene and scaled to the screen.
+---@class UiCanvasComponent
+---@field referenceResolution Vec2 The screen size the UI is designed for.
+---@field scaleMode integer|"Constant Pixel Size"|"Scale With Screen Size" Reads give the index: 0 Constant Pixel Size, 1 Scale With Screen Size.
+---@field scaleFactor number Pixels per canvas unit (Constant Pixel Size). From 0.01 to 100.
+---@field matchWidthOrHeight number Scale With Screen Size: 0 follows the width, 1 the height. From 0 to 1.
+---@field sortOrder integer Canvases with a higher order draw on top and get the pointer first.
+
+---Position and size of a UI element inside its parent, with anchors.
+---@class UiRectComponent
+---@field anchorMin Vec2 (0, 0) is the parent's top-left, (1, 1) its bottom-right.
+---@field anchorMax Vec2 Different from anchorMin on an axis: the element stretches with the parent.
+---@field pivot Vec2 Point that position places: (0, 0) top-left, (0.5, 0.5) center.
+---@field position Vec2 Offset of the pivot from the anchors, in canvas units (+Y is down).
+---@field size Vec2 Size in canvas units; on stretched axes, added to the anchored span.
+
+---A colored rectangle or image filling the element; also a panel background.
+---@class UiImageComponent
+---@field texture string Empty draws a plain rectangle. Project-relative asset path (.png;.jpg;.jpeg;.bmp;.tga;.qoi;.gif).
+---@field color Color
+---@field raycastTarget boolean Blocks the pointer from reaching elements below.
+---@field visible boolean
+
+---Text aligned inside the element's rectangle.
+---@class UiTextComponent
+---@field text string
+---@field font string Project-relative asset path (.ttf;.otf).
+---@field fontSize number In canvas units. From 0.01 to 1000.
+---@field color Color
+---@field horizontalAlignment integer|"Left"|"Center"|"Right" Reads give the index: 0 Left, 1 Center, 2 Right.
+---@field verticalAlignment integer|"Top"|"Middle"|"Bottom" Reads give the index: 0 Top, 1 Middle, 2 Bottom.
+---@field visible boolean
+
+---Makes the element clickable; tints its UiImage and runs an action on click.
+---@class UiButtonComponent
+---@field interactable boolean
+---@field normalColor Color
+---@field hoverColor Color
+---@field pressedColor Color
+---@field disabledColor Color
+---@field action integer|"None"|"Message"|"Load Scene"|"Quit" Reads give the index: 0 None, 1 Message, 2 Load Scene, 3 Quit.
+---@field target Entity Message receiver; empty uses the nearest scripted entity from the button upwards.
+---@field message string Function (Lua), Message event (visual) or onMessage (C++) to call.
+---@field scene string Scene loaded by the Load Scene action. Project-relative asset path (.rscene).
 
 -- ---- Log ---------------------------------------------------------------------------------------
 
@@ -1376,6 +1436,50 @@ function Camera.screenToWorld(screen, distance) end
 ---@return Vec3 direction
 function Camera.screenRay(screen) end
 
+-- ---- Ui ----------------------------------------------------------------------------------------
+
+Ui = {}
+
+---Sets the text of the entity's UiText.
+---@param entity? Entity
+---@param text? any Default: "".
+function Ui.setText(entity, text) end
+
+---The text of the entity's UiText.
+---@param entity? Entity
+---@return string text
+function Ui.getText(entity) end
+
+---Enables or disables the entity's UiButton; a disabled button ignores the pointer and shows its disabled color.
+---@param entity? Entity
+---@param interactable? boolean Default: true.
+function Ui.setInteractable(entity, interactable) end
+
+---True for the rest of the frame in which the button was clicked.
+---@param entity? Entity
+---@return boolean clicked
+function Ui.wasClicked(entity) end
+
+---True while the pointer is over the button.
+---@param entity? Entity
+---@return boolean hovered
+function Ui.isHovered(entity) end
+
+---Clicks the button as the pointer would: its action runs now and it counts as clicked this frame. False if it is disabled or inactive.
+---@param entity? Entity
+---@return boolean clicked
+function Ui.click(entity) end
+
+---True if the pointer is over UI this frame, so gameplay can ignore clicks meant for the UI.
+---@return boolean over
+function Ui.isPointerOverUi() end
+
+---The element's rectangle on the screen in pixels: top-left position and size (zero if it is not shown).
+---@param entity? Entity
+---@return Vec2 position
+---@return Vec2 size
+function Ui.screenRect(entity) end
+
 -- ---- Math --------------------------------------------------------------------------------------
 
 Math = {}
@@ -1853,7 +1957,7 @@ Game = {}
 ---Quits the game (stops play mode in the editor).
 function Game.quit() end
 
----Pauses or resumes the game.
+---Pauses or resumes the game: game time stops (physics, timers, Time.delta is 0) while the UI and Update keep running.
 ---@param paused? boolean Default: true.
 function Game.setPaused(paused) end
 

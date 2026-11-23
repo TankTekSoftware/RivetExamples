@@ -1,11 +1,11 @@
 {
   "format": "rivet.material",
   "version": 1,
-  "name": "paddle",
+  "name": "white",
   "baseColor": [
     1.0,
     1.0,
-    1.0,
+    0.0,
     1.0
   ],
   "baseColorTexture": "",
@@ -17,16 +17,17 @@
   "occlusionTexture": "",
   "occlusionStrength": 1.0,
   "emissive": [
+    1.0,
+    1.0,
     0.0,
-    0.0,
-    0.0
+    1.0
   ],
-  "emissiveStrength": 1.0,
+  "emissiveStrength": 8.0,
   "emissiveTexture": "",
   "alphaMode": "opaque",
   "alphaCutoff": 0.5,
   "doubleSided": false,
-  "unlit": true,
+  "unlit": false,
   "uvScale": [
     1.0,
     1.0

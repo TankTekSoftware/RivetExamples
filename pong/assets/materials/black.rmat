@@ -26,7 +26,7 @@
   "alphaMode": "opaque",
   "alphaCutoff": 0.5,
   "doubleSided": false,
-  "unlit": true,
+  "unlit": false,
   "uvScale": [
     1.0,
     1.0

@@ -10,7 +10,7 @@
     "height": 720,
     "resizable": true,
     "fullscreen": false,
-    "vsync": true,
+    "vsync": false,
     "targetFps": 0
   },
   "physics": {
