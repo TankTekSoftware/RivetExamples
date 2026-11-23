@@ -334,7 +334,7 @@
           "visible": true
         },
         "LuaScript": {
-          "script": "scripts/Player.lua",
+          "script": "scripts/PlayerPaddle.lua",
           "properties": {
             "halfLength": {
               "type": "float",
@@ -382,7 +382,7 @@
           "visible": true
         },
         "LuaScript": {
-          "script": "scripts/Bot.lua",
+          "script": "scripts/BotPaddle.lua",
           "properties": {},
           "enabled": true
         }
