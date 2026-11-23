@@ -77,6 +77,9 @@ function Ball:applyPaddleBounce(pos, paddle)
         return 
     end
 
+    -- Increase the speed after a paddle hit.
+    self.speed = self.speed + 0.25
+
     -- Push the ball out so it does not stay inside the paddle
     pos.x = paddlePos.x + side * reachX
 
