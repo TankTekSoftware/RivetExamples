@@ -80,22 +80,16 @@ function Ball:onUpdate(dt)
     self.entity.position = pos
 end
 
-function Ball:playSound()
-    local idx = math.random(0, 3)
-    if idx == self.lastSoundIdx then
-        self:playSound()
-        return
-    end
+function Ball:playSound(idx)
     Audio.playSound("assets/sfx/ballBounce" .. idx .. ".wav")
-    self.lastSoundIdx = idx
 end
 
 function Ball:applyBounce(p, v, limit)
     if p >= limit then
-        self:playSound()
+        self:playSound(2)
         return limit, -math.abs(v)
     elseif p <= -limit then
-        self:playSound()
+        self:playSound(1)
         return -limit, math.abs(v)
     end
 
@@ -121,10 +115,14 @@ function Ball:applyPaddleBounce(pos, paddle)
     end
 
     -- Increase the speed after a paddle hit.
-    self.speed = self.speed + 0.25
+    self.speed = self.speed + 1.0
 
     -- Play the blip sound effect
-    self:playSound()
+    if pos.x < 0 then
+        self:playSound(0)
+    elseif pos.x > 0 then
+        self:playSound(3)
+    end
 
     -- Push the ball out so it does not stay inside the paddle
     pos.x = paddlePos.x + side * reachX
