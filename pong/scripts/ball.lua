@@ -50,9 +50,8 @@ function Ball:onUpdate(dt)
     pos.z = pos.z + self.velocityZ * self.speed * dt
 
     if pos.x <= -self.boundX then
-        print("Player Scored!")
         pos.x, pos.z = self:reset()
-        self.gameController:send("addPlayerScore")
+        self.gameController:send("addBotScore")
 
         -- Apply the updated position.
         self.entity.position = pos
@@ -60,9 +59,8 @@ function Ball:onUpdate(dt)
     end
 
     if pos.x >= self.boundX then
-        print("Bot Scored!")
         pos.x, pos.z = self:reset()
-        self.gameController:send("addBotScore")
+        self.gameController:send("addPlayerScore")
 
         -- Apply the updated position.
         self.entity.position = pos
