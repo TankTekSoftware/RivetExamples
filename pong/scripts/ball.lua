@@ -81,7 +81,7 @@ function Ball:onUpdate(dt)
 end
 
 function Ball:playSound(idx)
-    Audio.playSound("assets/sfx/ballBounce" .. idx .. ".wav")
+    Audio.playSound("assets/sfx/ballBounce" .. idx .. ".wav", 0.2, 1.0)
 end
 
 function Ball:applyBounce(p, v, limit)

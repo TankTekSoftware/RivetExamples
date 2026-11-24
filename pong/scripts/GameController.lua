@@ -24,11 +24,19 @@ end
 function GameController:addBotScore()
     self.botScore = self.botScore + 1
     self.scoreLabel:send("applyScore", { self.playerScore, self.botScore })
+
+    if self.botScore >= 7 then
+        self:setScore(0, 0)
+    end
 end
 
 function GameController:addPlayerScore()
     self.playerScore = self.playerScore + 1
     self.scoreLabel:send("applyScore", { self.playerScore, self.botScore })
+
+    if self.playerScore >= 7 then
+        self:setScore(0, 0)
+    end
 end
 
 return GameController
